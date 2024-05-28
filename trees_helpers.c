@@ -36,22 +36,27 @@ void append(Node** ppt, int cargo) {
 
 
 void get_imbalances(Node* pt) {
-	//Node* pt = *pt;
+
 	if (pt == NULL) {
 		return;
 	}
-	if (pt->right && pt->left) {
-		pt->imbalance = pt->right->depth - pt->left->depth;
-	} else if (pt->right) {
-		pt->imbalance = pt->right->depth;
-	} else if (pt->left) {
-	pt->imbalance = -(pt->left->depth);
-	} else {
-	pt->imbalance = 0;
-	}
-	get_imbalances(pt->right);
-	get_imbalances(pt->left);
+	int right = 0;
+	int left = 0;
 
+
+	if (pt->right != NULL) {
+		get_imbalances(pt->right);
+		right = pt->right->depth + 1;
+
+
+	}
+
+	if (pt->left != NULL) {
+		get_imbalances(pt->left);
+		left = pt->left->depth + 1;
+	}
+
+	pt->imbalance = right - left;
 }
 
 void release(Node* pt) {
@@ -101,7 +106,7 @@ void display_sorted(Node* pt) {
 
 
 Node* get_from_file(char* file_name) {
-	
+
 	Node* tp = NULL;
 
 	char buff[255];
