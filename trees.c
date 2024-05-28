@@ -7,7 +7,7 @@
 int main() {
 
 	Node* pt = NULL;
-
+	/*
 	append(&pt, 42);
 	append(&pt, 7);
 	append(&pt, 99);
@@ -15,12 +15,16 @@ int main() {
 	append(&pt, 3);
 	append(&pt, 1);
 	append(&pt, 100);
+	*/
+	pt = get_from_file("in.txt");
 
 	display_tree(pt, 0);
 	printf("------------\n");
 	display_sorted(pt);
 
 	release(pt);
+
+
 
 	return 0;
 }

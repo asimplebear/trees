@@ -54,7 +54,9 @@ void display_tree(Node* pt, int indent) {
 	}
 
 	printf("%d\n", pt->cargo);
+
 	display_tree(pt->left, indent + 1);
+
 	display_tree(pt->right, indent + 1);
 
 }
@@ -69,3 +71,23 @@ void display_sorted(Node* pt) {
 	display_sorted(pt->right);
 }
 
+Node* get_from_file(char* file_name) {
+
+	
+	Node* tp = NULL;
+
+	char buff[255];
+	FILE* fp;
+	fp = fopen(file_name, "r");
+	while (1 == fscanf(fp, "%s", buff)) {
+		append(&tp, atoi(buff));
+
+	}
+
+
+	
+	return tp;
+
+
+
+}
