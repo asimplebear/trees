@@ -5,6 +5,8 @@ struct NODE {
         struct NODE* left;
         struct NODE* right;
         int cargo;
+	int depth;
+	int imbalance;
 } typedef Node;
 
 
@@ -17,17 +19,40 @@ void append(Node** ppt, int cargo) {
 		pt->cargo = cargo;
 		pt->left = NULL;
 		pt->right = NULL;
+		pt->depth = 0;
+		pt->imbalance = 0;
 		*ppt = pt;
 		return;
 	}
 
 	if (cargo < pt->cargo) {
 		append(&(pt->left), cargo);
+		(pt->depth) = pt->left->depth + 1;
 	} else {
 		append(&(pt->right), cargo);
+		(pt->depth) = pt->right->depth + 1;
 	}
 }
 
+
+void get_imbalances(Node* pt) {
+	//Node* pt = *pt;
+	if (pt == NULL) {
+		return;
+	}
+	if (pt->right && pt->left) {
+		pt->imbalance = pt->right->depth - pt->left->depth;
+	} else if (pt->right) {
+		pt->imbalance = pt->right->depth;
+	} else if (pt->left) {
+	pt->imbalance = -(pt->left->depth);
+	} else {
+	pt->imbalance = 0;
+	}
+	get_imbalances(pt->right);
+	get_imbalances(pt->left);
+
+}
 
 void release(Node* pt) {
 
@@ -55,7 +80,7 @@ void display_tree(Node* pt, int indent) {
 		return;
 	}
 
-	printf("%d\n", pt->cargo);
+	printf("%d(%d){%d}\n", pt->cargo, pt->depth, pt->imbalance);
 
 	display_tree(pt->left, indent + 1);
 
@@ -65,6 +90,7 @@ void display_tree(Node* pt, int indent) {
 
 
 void display_sorted(Node* pt) {
+
 	if (pt == NULL) {
 		return;
 	}
@@ -73,8 +99,8 @@ void display_sorted(Node* pt) {
 	display_sorted(pt->right);
 }
 
-Node* get_from_file(char* file_name) {
 
+Node* get_from_file(char* file_name) {
 	
 	Node* tp = NULL;
 
@@ -83,13 +109,6 @@ Node* get_from_file(char* file_name) {
 	fp = fopen(file_name, "r");
 	while (1 == fscanf(fp, "%s", buff)) {
 		append(&tp, atoi(buff));
-
 	}
-
-
-	
 	return tp;
-
-
-
 }

@@ -17,7 +17,7 @@ int main() {
 	append(&pt, 100);
 	*/
 	pt = get_from_file("in.txt");
-
+	get_imbalances(pt);
 	display_tree(pt, 0);
 	printf("------------\n");
 	display_sorted(pt);

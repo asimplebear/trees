@@ -9,5 +9,5 @@ void display_sorted(Node* pt);
 
 Node* get_from_file(char* file_name);
 
-
+void get_imbalances(Node* pt);
 #endif
