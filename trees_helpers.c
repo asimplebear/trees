@@ -44,13 +44,15 @@ void release(Node* pt) {
 
 void display_tree(Node* pt, int indent) {
 
-	if (pt == NULL) {
-		return;
-	}
 
 	int i;
 	for (i=0; i<indent; i++) {
 		printf(" ");
+	}
+
+	if (pt == NULL) {
+		printf("*\n");
+		return;
 	}
 
 	printf("%d\n", pt->cargo);
