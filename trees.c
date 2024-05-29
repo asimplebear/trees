@@ -2,9 +2,23 @@
 #include<stdlib.h>
 #include<stdio.h>
 
+/*
+void rot_right(Node** ppt) {
+	Node* pt = *ppt;
+if (pt == NULL) {
+return;}
+	printf("%d\n", pt->cargo);
+	//Node* alpha = pt->left;
+	//Node* beta = pt->right->left;
+	//Node* gamma = pt->right->right;
+	//pt->right->left = pt;
+	//pt->right = beta;
+	//pt = pt->right;
+	ppt = &pt;
+}
+*/
 
-
-int main() {
+int main(int argc, char** argv) {
 
 	Node* pt = NULL;
 	/*
@@ -16,10 +30,18 @@ int main() {
 	append(&pt, 1);
 	append(&pt, 100);
 	*/
-	pt = get_from_file("in.txt");
+	if (argc == 2) {
+		pt = get_from_file(argv[1]);
+	} else {
+		pt = get_from_file("in.txt");
+	}
 	get_imbalances(pt);
 	display_tree(pt, 0);
 	printf("------------\n");
+	rot_right(&pt);
+	get_imbalances(pt);
+	display_tree(pt, 0);
+	printf("+++++++++++++++\n");
 	display_sorted(pt);
 
 	release(pt);

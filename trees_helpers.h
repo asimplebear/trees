@@ -8,6 +8,9 @@ void display_tree(Node* pt, int indent);
 void display_sorted(Node* pt);
 
 Node* get_from_file(char* file_name);
-
+void rot_right(Node** ppt);
 void get_imbalances(Node* pt);
+
+
+
 #endif

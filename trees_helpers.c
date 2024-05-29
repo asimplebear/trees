@@ -1,13 +1,13 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-struct NODE {
+typedef struct NODE {
         struct NODE* left;
         struct NODE* right;
         int cargo;
 	int depth;
 	int imbalance;
-} typedef Node;
+} Node;
 
 
 void append(Node** ppt, int cargo) {
@@ -116,4 +116,16 @@ Node* get_from_file(char* file_name) {
 		append(&tp, atoi(buff));
 	}
 	return tp;
+}
+
+
+void rot_right(Node** ppt) {
+
+	Node* pt = *ppt;
+	Node* beta = pt->right->left;
+	Node* tmp = pt;
+	pt  = pt->right;
+	tmp->right = beta;
+	pt->left = tmp;
+        *ppt = pt;
 }
