@@ -9,8 +9,9 @@ void display_sorted(Node* pt);
 
 Node* get_from_file(char* file_name);
 void rot_right(Node** ppt);
+void rot_left(Node** ppt);
 void get_imbalances(Node* pt);
-
+void walk(Node** ppt);
 
 
 #endif

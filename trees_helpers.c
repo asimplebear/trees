@@ -119,13 +119,55 @@ Node* get_from_file(char* file_name) {
 }
 
 
-void rot_right(Node** ppt) {
+void rot_left(Node** ppt) {
 
 	Node* pt = *ppt;
+
+	if (pt == NULL) { return; }
+	if (pt->right == NULL) { return; }
+
+
 	Node* beta = pt->right->left;
 	Node* tmp = pt;
 	pt  = pt->right;
 	tmp->right = beta;
 	pt->left = tmp;
-        *ppt = pt;
+	*ppt = pt;
 }
+
+
+void rot_right(Node** ppt) {
+
+	Node* pt = *ppt;
+
+	if (pt == NULL) { return; }
+	if (pt->left == NULL) { return; }
+
+	Node* beta = pt->left->right;
+	Node* tmp = pt;
+	pt = pt->left;
+	tmp->left = beta;
+	pt->right = tmp;
+	*ppt = pt;
+}
+
+
+void walk(Node** ppt) {
+
+        Node* pt = *ppt;
+        if (pt == NULL) {
+                return;
+        }
+
+        walk(&(pt->left));
+        walk(&(pt->right));
+
+	get_imbalances(pt);
+
+        if (pt->imbalance > 1) {
+                rot_left(&pt);
+        } else if (pt->imbalance < -1) {
+                rot_right(&pt);
+        }
+}
+

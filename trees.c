@@ -3,20 +3,26 @@
 #include<stdio.h>
 
 /*
-void rot_right(Node** ppt) {
+void walk(Node** ppt) {
+
 	Node* pt = *ppt;
-if (pt == NULL) {
-return;}
-	printf("%d\n", pt->cargo);
-	//Node* alpha = pt->left;
-	//Node* beta = pt->right->left;
-	//Node* gamma = pt->right->right;
-	//pt->right->left = pt;
-	//pt->right = beta;
-	//pt = pt->right;
-	ppt = &pt;
+	if (pt == NULL) {
+		return;
+	}
+
+	walk(&(pt->left));
+	walk(&(pt->right));
+
+	if (pt->imbalance > 2) {
+		rot_left(&pt);
+	} else if (pt->imbalance < -2) {
+		rot_right(&pt);
+	}
 }
 */
+
+
+
 
 int main(int argc, char** argv) {
 
@@ -38,8 +44,9 @@ int main(int argc, char** argv) {
 	get_imbalances(pt);
 	display_tree(pt, 0);
 	printf("------------\n");
-	rot_right(&pt);
+	//rot_right(&pt);
 	get_imbalances(pt);
+//walk(&pt);
 	display_tree(pt, 0);
 	printf("+++++++++++++++\n");
 	display_sorted(pt);
