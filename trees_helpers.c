@@ -10,6 +10,11 @@ typedef struct NODE {
 } Node;
 
 
+int max(int a, int b) {
+	if (a>b) { return a; }
+	return b;
+}
+
 void append(Node** ppt, int cargo) {
 
 	Node* pt = *ppt;
@@ -27,11 +32,16 @@ void append(Node** ppt, int cargo) {
 
 	if (cargo < pt->cargo) {
 		append(&(pt->left), cargo);
-		(pt->depth) = pt->left->depth + 1;
 	} else {
 		append(&(pt->right), cargo);
-		(pt->depth) = pt->right->depth + 1;
 	}
+
+	int rd = 0; int ld = 0;
+	if (pt->right) {rd = pt->right->depth;}
+	if (pt->left) {ld = pt->left->depth;}
+	(pt->depth) = max(rd, ld) + 1;
+	(pt->imbalance) = rd - ld;
+
 }
 
 
@@ -154,20 +164,7 @@ void rot_right(Node** ppt) {
 
 void walk(Node** ppt) {
 
-        Node* pt = *ppt;
-        if (pt == NULL) {
-                return;
-        }
+	rot_left(&((**ppt).right->right));
 
-        walk(&(pt->left));
-        walk(&(pt->right));
-
-	get_imbalances(pt);
-
-        if (pt->imbalance > 1) {
-                rot_left(&pt);
-        } else if (pt->imbalance < -1) {
-                rot_right(&pt);
-        }
 }
 

@@ -44,9 +44,9 @@ int main(int argc, char** argv) {
 	get_imbalances(pt);
 	display_tree(pt, 0);
 	printf("------------\n");
-	//rot_right(&pt);
-	get_imbalances(pt);
-//walk(&pt);
+
+
+	walk(&pt);
 	display_tree(pt, 0);
 	printf("+++++++++++++++\n");
 	display_sorted(pt);
