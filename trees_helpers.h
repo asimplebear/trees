@@ -4,7 +4,7 @@
 struct NODE typedef Node;
 void append(Node**, int);
 void release(Node*);
-void display_tree(Node*, intt);
+void display_tree(Node*, int);
 void display_sorted(Node*);
 int max(int, int);
 Node* get_from_file(char*);
