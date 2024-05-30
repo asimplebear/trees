@@ -136,6 +136,16 @@ void rot_left(Node** ppt) {
 	if (pt == NULL) { return; }
 	if (pt->right == NULL) { return; }
 
+	int dalpha = 0; int dbeta = 0; int dgamma = 0;
+	if (pt->left) {dalpha = pt->left->depth;}
+	if (pt->right->left) { dbeta = pt->right->left->depth; }
+	if (pt->right->right) { dgamma = pt->right->right->depth; }
+
+	pt->depth = max(dalpha, dbeta) + 1;
+	pt->right->depth = max(pt->depth, dgamma) + 1;
+
+	pt->imbalance = dbeta - dalpha;
+	pt->right->imbalance = dgamma - pt->depth;
 
 	Node* beta = pt->right->left;
 	Node* tmp = pt;
@@ -152,6 +162,17 @@ void rot_right(Node** ppt) {
 
 	if (pt == NULL) { return; }
 	if (pt->left == NULL) { return; }
+
+	int dalpha = 0; int dbeta = 0; int dgamma = 0;
+	if (pt->right) { dgamma = pt->right->depth; }
+	if (pt->left->right) { dbeta = pt->left->right->depth; }
+	if (pt->left->left) { dalpha = pt->left->left->depth; }
+
+	pt->depth = max(dbeta, dgamma) + 1;
+	pt->left->depth = max(pt->depth, dalpha) + 1;
+
+	pt->imbalance = dgamma - dbeta;
+	pt->left->imbalance = pt->depth - dalpha;
 
 	Node* beta = pt->left->right;
 	Node* tmp = pt;
