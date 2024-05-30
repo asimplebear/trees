@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
 	printf("------------\n");
 
 
-	walk(&pt);
+	walk(pt);
 	display_tree(pt, 0);
 	printf("+++++++++++++++\n");
 	display_sorted(pt);

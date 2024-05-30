@@ -162,9 +162,9 @@ void rot_right(Node** ppt) {
 }
 
 
-void walk(Node** ppt) {
+void walk(Node* pt) {
 
-	rot_left(&((**ppt).right->right));
+	rot_left(&((*pt).right->right));
 
 }
 
